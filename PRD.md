@@ -28,7 +28,7 @@ Mengembangkan platform donasi pintar berbasis AI yang secara otomatis memvalidas
 
 ---
 
-## 3. User Flow (Berdasarkan Diagram)
+## 3. User Flow 
 
 ### 3.1. Alur Donatur (Donatur Flowchart)
 1. Donatur melakukan *scan* QR code atau klik *link* donasi.
