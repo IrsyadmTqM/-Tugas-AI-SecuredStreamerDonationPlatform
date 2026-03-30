@@ -110,9 +110,7 @@ Koneksi yang dibuka oleh *Browser Source* OBS untuk mendengarkan *event* donasi 
       "data": {
         "donator_name": "Hamba Allah",
         "amount": 50000,
-        "message": "Semangat terus bang streamnya!",
-        "gif_url": "[https://api.domainanda.com/assets/default-dance.gif](https://api.domainanda.com/assets/default-dance.gif)",
-        "tts_audio_url": "[https://api.domainanda.com/tts/generate?text=](https://api.domainanda.com/tts/generate?text=)..."
+        "message": "Semangat terus bang streamnya!"
       }
     }
     ```
@@ -129,6 +127,6 @@ Membutuhkan *header* otorisasi: `Authorization: Bearer <JWT_TOKEN>`
 | **POST** | `/auth/login` | Login streamer, mengembalikan token JWT. |
 | **GET** | `/streamer/dashboard` | Mengambil metrik utama (saldo, jumlah donasi, donasi terakhir). |
 | **GET** | `/streamer/moderation-logs` | Menampilkan riwayat pesan yang berhasil diblokir AI. |
-| **GET** | `/streamer/overlay` | Mengambil data pengaturan Overlay OBS dan TTS. |
-| **PUT** | `/streamer/overlay` | Memperbarui URL GIF, suara TTS, atau warna teks *overlay*. |
+| **GET** | `/streamer/overlay` | Mengambil data pengaturan visual Overlay OBS (warna, ukuran font). |
+| **PUT** | `/streamer/overlay` | Memperbarui pengaturan visual overlay (warna teks, *font family*, tata letak). |
 | **POST** | `/streamer/withdrawals` | Mengajukan pencairan saldo (mengurangi `users.balance`). |

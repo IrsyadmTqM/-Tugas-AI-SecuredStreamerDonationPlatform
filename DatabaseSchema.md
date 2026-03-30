@@ -1,12 +1,6 @@
-# System Architecture & API Documentation
+# Database Schema (Entity-Relationship Diagram)
 
-Dokumen ini berisi rancangan skema *database* dan struktur API untuk platform AI-Secured Streamer Donation.
-
----
-
-## 1. Database Schema (Entity-Relationship Diagram)
-
-Bagan di bawah ini dibuat menggunakan Mermaid.js yang didukung secara *native* oleh GitHub.
+Dokumen ini berisi rancangan skema *database* untuk platform AI-Secured Streamer Donation (Versi Teks/Tanpa TTS & GIF). Bagan di bawah ini dibuat menggunakan Mermaid.js.
 
 ```mermaid
 erDiagram
@@ -30,9 +24,7 @@ erDiagram
         uuid id PK
         uuid user_id FK
         varchar overlay_token
-        boolean tts_enabled
-        decimal min_tts_amount
-        json theme_settings
+        json visual_settings
         timestamp updated_at
     }
 
