@@ -1,9 +1,9 @@
-# 🔐 API Contract: Authentication (Auth)
+# API Contract: Authentication (Auth)
 
-Dokumen ini berisi spesifikasi dan kontrak API untuk fitur autentikasi 
+Dokumen ini berisi spesifikasi dan kontrak API untuk fitur autentikasi.
 Tim Front-End (FE) dan Back-End (BE) wajib merujuk pada format data di bawah ini untuk proses integrasi.
 
-**Base URL API:** `http://localhost:8000` *(Ubah sesuai URL server saat deployment)*
+Base URL API: `http://localhost:8000` (ubah sesuai URL server saat deployment)
 
 ---
 
@@ -11,20 +11,24 @@ Tim Front-End (FE) dan Back-End (BE) wajib merujuk pada format data di bawah ini
 
 Endpoint untuk melakukan autentikasi reguler menggunakan email dan kata sandi.
 
-* **URL:** `/api/auth/login`
-* **Method:** `POST`
-* **Content-Type:** `application/json`
+- URL: `/api/auth/login`
+- Method: `POST`
+- Content-Type: `application/json`
 
 ### Request Body
+
 ```json
 {
   "email": "streamer@neon.com",
   "password": "kata_sandi_rahasia_anda"
 }
-Responses
-✅ 200 OK (Login Sukses)
+```
 
-JSON
+### Responses
+
+#### 200 OK (Login Sukses)
+
+```json
 {
   "status": "success",
   "message": "Login berhasil. Selamat datang kembali!",
@@ -38,44 +42,55 @@ JSON
     }
   }
 }
-❌ 401 Unauthorized (Kredensial Salah)
+```
 
-JSON
+#### 401 Unauthorized (Kredensial Salah)
+
+```json
 {
   "status": "error",
   "message": "Alamat email atau kata sandi Anda salah.",
   "error_code": "AUTH_CREDENTIALS_INVALID"
 }
-❌ 429 Too Many Requests (Brute-Force Detected)
+```
 
-JSON
+#### 429 Too Many Requests (Brute-Force Detected)
+
+```json
 {
   "status": "error",
   "message": "Upaya login mencurigakan dideteksi. Akun Anda telah dibatasi sementara.",
   "error_code": "AUTH_BRUTE_FORCE_DETECTED",
   "retry_after_seconds": 3600
 }
-2. Register Akun Streamer
+```
+
+---
+
+## 2. Register Akun Streamer
+
 Endpoint untuk pendaftaran akun streamer baru.
 
-URL: /api/auth/register
+- URL: `/api/auth/register`
+- Method: `POST`
+- Content-Type: `application/json`
 
-Method: POST
+### Request Body
 
-Content-Type: application/json
-
-Request Body
-JSON
+```json
 {
   "displayName": "NeonGhost",
   "email": "streamer@neon.protocol",
   "password": "password_minimal_8_karakter",
   "confirmPassword": "password_minimal_8_karakter"
 }
-Responses
-✅ 201 Created (Registrasi Sukses)
+```
 
-JSON
+### Responses
+
+#### 201 Created (Registrasi Sukses)
+
+```json
 {
   "status": "success",
   "message": "Registrasi berhasil.",
@@ -89,32 +104,41 @@ JSON
     }
   }
 }
-❌ 409 Conflict (Email Sudah Digunakan)
+```
 
-JSON
+#### 409 Conflict (Email Sudah Digunakan)
+
+```json
 {
   "status": "error",
   "message": "Email ini sudah digunakan oleh pengguna lain.",
   "error_code": "AUTH_EMAIL_TAKEN"
 }
-3. Login/Register dengan Google SSO
+```
+
+---
+
+## 3. Login/Register dengan Google SSO
+
 Endpoint untuk menangani autentikasi melalui Google Single Sign-On.
 
-URL: /api/auth/sso/google
+- URL: `/api/auth/sso/google`
+- Method: `POST`
+- Content-Type: `application/json`
 
-Method: POST
+### Request Body
 
-Content-Type: application/json
-
-Request Body
-JSON
+```json
 {
   "provider_token": "id_token_from_google_here..."
 }
-Responses
-✅ 200 OK (SSO Sukses)
+```
 
-JSON
+### Responses
+
+#### 200 OK (SSO Sukses)
+
+```json
 {
   "status": "success",
   "message": "Autentikasi Google SSO berhasil.",
@@ -129,24 +153,31 @@ JSON
     "new_account": false
   }
 }
-4. Lupa Password (Request Reset)
+```
+
+---
+
+## 4. Lupa Password (Request Reset)
+
 Endpoint untuk meminta pengiriman link reset kata sandi ke email.
 
-URL: /api/auth/password/forgot
+- URL: `/api/auth/password/forgot`
+- Method: `POST`
+- Content-Type: `application/json`
 
-Method: POST
+### Request Body
 
-Content-Type: application/json
-
-Request Body
-JSON
+```json
 {
   "email": "streamer@neon.com"
 }
-Responses
-✅ 200 OK (Link Terkirim)
+```
 
-JSON
+### Responses
+
+#### 200 OK (Link Terkirim)
+
+```json
 {
   "status": "success",
   "message": "Tautan reset kata sandi telah dikirim ke alamat email Anda.",
@@ -154,43 +185,55 @@ JSON
     "next_step": "Cek kotak masuk atau folder spam email Anda."
   }
 }
-❌ 404 Not Found (Email Tidak Terdaftar)
+```
 
-JSON
+#### 404 Not Found (Email Tidak Terdaftar)
+
+```json
 {
   "status": "error",
   "message": "Alamat email tidak terdaftar dalam sistem kami.",
   "error_code": "PASS_EMAIL_NOT_FOUND"
 }
-5. Reset Password (Recovery)
+```
+
+---
+
+## 5. Reset Password (Recovery)
+
 Endpoint untuk menyimpan kata sandi baru setelah user mengklik link dari email.
 
-URL: /api/auth/password/reset
+- URL: `/api/auth/password/reset`
+- Method: `POST`
+- Content-Type: `application/json`
 
-Method: POST
+### Request Body
 
-Content-Type: application/json
-
-Request Body
-JSON
+```json
 {
   "token": "token_recovery_from_email_here...",
   "newPassword": "password_baru_anda_8_karakter",
   "confirmNewPassword": "password_baru_anda_8_karakter"
 }
-Responses
-✅ 200 OK (Password Berhasil Diubah)
+```
 
-JSON
+### Responses
+
+#### 200 OK (Password Berhasil Diubah)
+
+```json
 {
   "status": "success",
   "message": "Kata sandi Anda telah berhasil diperbarui. Silakan login kembali."
 }
-❌ 400 Bad Request (Token Tidak Valid / Kadaluarsa)
+```
 
-JSON
+#### 400 Bad Request (Token Tidak Valid / Kadaluarsa)
+
+```json
 {
   "status": "error",
   "message": "Tautan reset kata sandi Anda tidak valid atau telah kadaluarsa.",
   "error_code": "PASS_TOKEN_INVALID"
 }
+```
