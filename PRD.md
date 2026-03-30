@@ -82,9 +82,8 @@ Sistem visual dan audio yang terhubung langsung ke *software broadcasting* (OBS/
 * **Acceptance Criteria:**
   * **AC 1:** Sistem menyediakan URL *Browser Source* unik di Dashboard Streamer untuk dipasang ke OBS.
   * **AC 2:** Sistem menerima Webhook "Sukses" dari Payment Gateway dan langsung mengirimkan *trigger* ke URL Overlay tersebut via WebSockets.
-  * **AC 3:** Overlay menampilkan animasi GIF/gambar, Nama Donatur, Nominal, dan Teks Pesan di layar OBS.
-  * **AC 4:** Sistem membacakan pesan teks menggunakan fitur *Text-to-Speech* (TTS) jika fitur tersebut diaktifkan oleh streamer.
-  * **AC 5:** Delay dari pembayaran sukses hingga notifikasi muncul di layar maksimal 3 detik.
+  * **AC 3:** Overlay menampilkan Nama Donatur, Nominal, dan Teks Pesan di layar OBS.
+  * **AC 4:** Delay dari pembayaran sukses hingga notifikasi muncul di layar maksimal 3 detik.
 
 ### Feature 4: Dashboard Streamer & Manajemen Akun
 Pusat kontrol bagi streamer untuk memantau aktivitas donasi dan mengatur profil.
